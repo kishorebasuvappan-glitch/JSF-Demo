@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Validation</title>
+
+  <!-- Embedded CSS -->
+  <style>
+    /* Reset some default styles */
+    body, h1, p, table, th, td, input, select, fieldset {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Body background, center content */
+    body {
+      background-image: url('https://source.unsplash.com/1600x900/?nature,landscape');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 0 20px;
+      color: #333;
+    }
+
+    /* Container for centering form */
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Form fieldset styling */
+    fieldset {
+      border-radius: 15px;
+      border: none;
+      width: 600px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form legend styling */
+    legend {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #3498db;
+      padding: 0 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Form Layout */
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    table th {
+      text-align: left;
+      font-size: 1.1em;
+      color: #333;
+      padding-bottom: 8px;
+    }
+
+    table td {
+      padding: 8px;
+    }
+
+    /* Input and select styling */
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background-color: #f7f7f7;
+      font-size: 1em;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #3498db;
+      background-color: #fff;
+      outline: none;
+    }
+
+    /* Buttons */
+    .btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1em;
+      width: 48%;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    /* Error message styling */
+    .error {
+      color: #e74c3c;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
+    /* Responsive design adjustments */
+    @media (max-width: 768px) {
+      fieldset {
+        width: 90%;
+      }
+
+      input[type="submit"], input[type="reset"], .btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 1em;
+      }
+    }
+
+  </style>
+
+  <!-- JavaScript for Password Matching -->
+  <script type="text/javascript">
+    function checkPasswordMatch() {
+      var password = document.getElementById("password").value;
+      var retypePassword = document.getElementById("retypepassword").value;
+      var errorMessage = document.getElementById("passwordMismatchError");
+
+      // Check if passwords match
+      if (password !== retypePassword) {
+        errorMessage.style.display = "block";
+        errorMessage.innerHTML = "Passwords do not match!";
+      } else {
+        errorMessage.style.display = "none";
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h:form>
+      <!-- Form Container -->
+      <fieldset class="fieldset">
+        <legend>Form Validation</legend>
+
+        <!-- Form Table Layout -->
+        <table>
+          <tr>
+            <th><h:outputLabel for="name" value="Employee Name:" /></th>
+            <td><h:inputText id="name" value="#{Kishore_B_JSF_01_258586_form.name}" required="true" styleClass="form-control" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="username" value="Username:" /></th>
+            <td><h:inputText id="username" value="#{Kishore_B_JSF_01_258586_form.username}" required="true" styleClass="form-control" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="password" value="Password:" /></th>
+            <td><h:inputSecret id="password" value="#{Kishore_B_JSF_01_258586_form.password}" required="true" styleClass="form-control" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="retypepassword" value="Retype Password:" /></th>
+            <td><h:inputSecret id="retypepassword" value="#{Kishore_B_JSF_01_258586_form.retypePassword}" required="true" styleClass="form-control"
+                               onchange="checkPasswordMatch()" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel value="Gender:" /></th>
+            <td><h:selectOneRadio value="#{Kishore_B_JSF_01_258586_form.gender}" styleClass="form-control">
+              <f:selectItem itemValue="Male" itemLabel="Male" />
+              <f:selectItem itemValue="Female" itemLabel="Female" />
+              <f:selectItem itemValue="Other" itemLabel="Other" />
+            </h:selectOneRadio></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel value="Programming Skills:" /></th>
+            <td><h:selectManyCheckbox value="#{Kishore_B_JSF_01_258586_form.programmingSkills}" styleClass="form-control">
+              <f:selectItem itemValue="Java" itemLabel="Java" />
+              <f:selectItem itemValue="Android" itemLabel="Android" />
+              <f:selectItem itemValue="Ruby" itemLabel="Ruby" />
+              <f:selectItem itemValue=".NET" itemLabel=".NET" />
+            </h:selectManyCheckbox></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="contactno" value="Contact Number:" /></th>
+            <td><h:inputText id="contactno" value="#{Kishore_B_JSF_01_258586_form.contactno}" required="true" styleClass="form-control" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="email" value="Email:" /></th>
+            <td><h:inputText id="email" value="#{Kishore_B_JSF_01_258586_form.email}" required="true" styleClass="form-control" /></td>
+          </tr>
+
+          <tr>
+            <th><h:outputLabel for="college" value="College:" /></th>
+            <td><h:selectOneMenu value="#{Kishore_B_JSF_01_258586_form.college}" styleClass="form-control">
+              <f:selectItem itemValue="SSM" itemLabel="SSM" />
+              <f:selectItem itemValue="BBM" itemLabel="BBM" />
+              <f:selectItem itemValue="ANNA" itemLabel="ANNA" />
+            </h:selectOneMenu></td>
+          </tr>
+        </table>
+
+        <!-- Submit and Reset Buttons -->
+        <div class="form-buttons">
+          <h:commandButton value="Submit" action="#{Kishore_B_JSF_01_258586_form.submitForm}" styleClass="btn btn-primary" />
+          <h:commandButton value="Reset" type="reset" styleClass="btn btn-secondary" />
+        </div>
+
+        <!-- Password Mismatch Error -->
+        <div id="passwordMismatchError" class="error" style="display:none;">
+          <!-- Error message will be displayed here if passwords don't match -->
+        </div>
+
+        <!-- Feedback message for form submission -->
+        <h:messages styleClass="error" />
+
+      </fieldset>
+    </h:form>
+  </div>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
